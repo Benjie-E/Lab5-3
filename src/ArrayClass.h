@@ -17,4 +17,27 @@
  service (which may then retain a copy of this assignment on its
  database for the purpose of future plagiarism checking)
  */
-#include "FileReader.h"
+#pragma once
+#include <string>
+using namespace std;
+
+class ArrayClass {
+public:
+	ArrayClass();
+	string getFileName();
+	void readFile(string file);
+
+	void addTyping();
+
+	const string printArray();
+	void setSize(int size);
+	int getSize(){return arraySize;};
+private:
+	void addWord(string word);
+	void resetArray();
+
+	string* dArray;
+	int arrayLength; //how much is in array
+	int arraySize; //how big array is total
+};
+

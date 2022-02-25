@@ -17,11 +17,12 @@
  service (which may then retain a copy of this assignment on its
  database for the purpose of future plagiarism checking)
  */
-#include <iostream>
-#include <string>
-#include "FileReader.h"
-using namespace std;
 
+#include "ArrayClass.h"
+#include <string>
+#include <iostream>
+using namespace std;
+static ArrayClass array;
 string toLower(string& s) {
 	for(char& c:s) {
 		c = ::tolower(c);
@@ -30,36 +31,59 @@ string toLower(string& s) {
 }
 void inputType() {
 	string test;
-	cout << "Would you like to enter words from a file or typing:";
+	cout << "Would you like to enter words from a file or typing:"<<endl;
 label:
 	cin >> test;
 	if (toLower(test) == "file") {
-
+		array.readFile(array.getFileName());
 	}
 	else if (toLower(test) == "typing") {
-
+		array.addTyping();
 	}
 	else {
-		cout << "Please enter 'file' or typing':";
+		cout << "Please enter 'file' or 'typing':";
 		goto label;
 	}
 }
 void menu() {
 	string test;
-	cout << "Would you like to enter words from a file or typing:";
-label:
-	cin >> test;
-	if (toLower(test) == "file") {
-
+	cout <<endl<< "Would you like to:"<<endl\
+			<<"1)Create or add to an array"<<endl\
+			<<"2)Change the array size"<<endl\
+			<<"3)Print Array Information"<<endl\
+			<<"4)Exit the program"<<endl;
+cin >> test;
+cout <<test;
+try{
+	switch (stoi(test)){
+	case 1:
+		inputType();
+		menu();
+		break;
+	case 2:
+		{cout << "what size"<<endl;
+		string size;
+		cin >> size;
+		array.setSize(stoi(size));}
+		menu();
+		break;
+	case 3:
+		cout << "there is space for " << array.getSize() <<" words\n\
+				list of words so far:\n"<<array.printArray();
+		menu();
+		break;
+	case 4:
+		exit(5);
+		break;
+	default:
+		menu();
+		break;
 	}
-	else if (toLower(test) == "typing") {
-
-	}
-	else {
-		cout << "Please enter 'file' or typing':";
-		goto label;
+	}catch(...){
+		cout << "NOT A NUMBER";
+		menu();
 	}
 }
 int main() {
-	inputType();
+	menu();
 }
