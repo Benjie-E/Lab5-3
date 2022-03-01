@@ -41,7 +41,9 @@ void ArrayClass::resetArray() {
 ArrayClass::ArrayClass() {
 	resetArray();
 }
-
+ArrayClass::~ArrayClass(){
+	delete dArray;
+}
 void ArrayClass::readFile(string file) {
 	ifstream inFile(file);
 	if (inFile.good()) {
@@ -76,6 +78,7 @@ void ArrayClass::addWord(string word){
 void ArrayClass::setSize(int size) {
 	string* temp = new string[size];
 	copy(dArray,min(dArray+arrayLength,dArray+size),temp);
+	delete dArray;
 	dArray=temp;
 	if(size<arrayLength)
 		arrayLength=size;

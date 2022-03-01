@@ -24,6 +24,7 @@ using namespace std;
 class ArrayClass {
 public:
 	ArrayClass();
+	~ArrayClass();
 	string getFileName();
 	void readFile(string file);
 
